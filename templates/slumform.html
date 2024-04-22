@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/slumForm.css') }}" rel="stylesheet">
+
+	<title>Admin Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+			<img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+			<h2>Pukar</h2>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a href="/dashboard/Admin">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/dashboard/admin/addSlum">
+					<i class='bx bxs-message-add' ></i>
+					<span class="text">Add Slum</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/admin/activity/status">
+					<i class='bx bxs-hand-up' ></i>
+					<span class="text">Requests</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/admin/jobs/requests">
+					<i class='bx bx-briefcase' ></i>
+					<span class="text">Job Requests</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link"></a>
+			<form action="#">
+				
+			</form>
+			<div id="google_translate_element"></div>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename=session.profilePic) }}">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Add New Slum</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Fill the following form for adding slum under you </a>
+              <i class='bx bx-chevron-right' ></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+      <h3 style="color: green;">{{message}}</h3>
+
+      <div class="container">
+        <div class="content">
+          
+        
+            <form method="post" class="form">
+            <img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;">
+            <h2 style="font-weight: bolder">Slum Details</h2>
+    
+           
+
+              <div class="inputBoxwithIcon">
+                <div style="min-width: 20%;">
+					<i class='bx bxs-landmark' ></i>
+                	<label for="slumName">Slum Name</label>
+				</div>
+                <div>
+					<input type="text" name="slumName" class="form-control" id="inputFullName" aria-describedby="emailHelp" placeholder="Enter name of the slum" required>
+				</div>
+              </div>
+
+              <div class="inputBoxwithIcon">
+                <div style="min-width: 20%;">
+					<i class='bx bxs-city' ></i>
+                	<label for="city">City | Town</label>
+				</div>
+                <div>
+					<input type="text" name="city" class="form-control" id="inputFullName" aria-describedby="emailHelp" placeholder="Enter name of the city" required>
+				</div>
+              </div>
+
+              <div class="inputBoxwithIcon">
+				<div style="min-width: 20%;">
+					<i class='bx bxs-user' ></i>
+					<label for="authority">Authority</label>
+				</div>
+                <div>
+					<input type="text" name="authority" class="form-control" id="inputFullName" aria-describedby="emailHelp" placeholder="Enter full name" value="{{session.name}}" readonly>
+				</div>
+              </div>
+
+			  <div class="inputBoxwithIcon">
+				<div style="min-width: 20%;">
+					<i class='bx bx-location-plus' ></i>
+					<label for="authority">latitude</label>
+				</div>
+				<div>
+					<input type="text" name="latitude" class="form-control" id="latitude" aria-describedby="emailHelp" placeholder="Place marker on map " readonly required>
+				</div>
+              </div>
+
+
+			  <div class="inputBoxwithIcon">
+				<div style="min-width: 20%;">
+					<i class='bx bxs-location-plus' ></i>
+					<label for="authority">longitude</label>
+				</div>
+				<div>
+					<input type="text" name="longitude" class="form-control" id="longitude" aria-describedby="emailHelp" placeholder="Place marker on map " readonly required>
+				</div>
+              </div>
+
+			  <div id='map' style='width: 50%; height:500px;'></div><br/><br/>
+
+			  <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+			  <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' /> 
+			  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+			  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />           
+			  <script>
+				  var longitude=72.8777, 
+				  latitude=19.0760;
+				  function display_map(longitude, latitude) {
+					  mapboxgl.accessToken = "{{ mapbox_access_token }}"
+					  var map = new mapboxgl.Map({
+					  container: 'map',
+					  style: 'mapbox://styles/mapbox/satellite-streets-v10',
+					  center: [longitude,latitude],
+					  zoom: 16,
+					  bearing: -17.6,
+					  pitch:45
+				  
+					  });
+  
+					  var marker = new mapboxgl.Marker();
+  
+					  function add_marker (event) {
+					  var coordinates = event.lngLat;
+					  console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
+					  marker.setLngLat(coordinates).addTo(map);
+					  document.getElementById('latitude').value=coordinates.lat;
+					  document.getElementById('longitude').value=coordinates.lng;
+					  }
+  
+					  map.on('click', add_marker);
+  
+					  // fulscreen button 
+					  map.addControl(new mapboxgl.FullscreenControl());
+					  // display a blue marker
+					  var marker = new mapboxgl.Marker()
+							.setLngLat([longitude,latitude])
+							.addTo(map);
+						 
+							
+						// Navigation marker at top-left corner
+						var nav = new mapboxgl.NavigationControl();
+							map.addControl(nav, 'top-left');
+  
+						  
+							const geocoder = new MapboxGeocoder({
+						  // Initialize the geocoder
+						  accessToken: mapboxgl.accessToken, // Set the access token
+						  mapboxgl: mapboxgl, // Set the mapbox-gl instance
+						  marker: false // Do not use the default marker style
+						  });
+  
+						  // Add the geocoder to the map
+						  map.addControl(geocoder);
+							  
+							// change false to true, to get your location. Then, enable location in the browser.
+						map.addControl(new mapboxgl.GeolocateControl({
+							  positionOptions: {
+								  enableHighAccuracy: false
+							  },
+						  trackUserLocation: false
+					  }));
+						// The 'building' layer in the mapbox-streets vector source contains building-height
+					  // data from OpenStreetMap.
+					  map.on('load', function() {
+						  // Insert the layer beneath any symbol layer.
+						  var layers = map.getStyle().layers;
+						  var labelLayerId;
+						  for (var i = 0; i < layers.length; i++) {
+							  if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+								  labelLayerId = layers[i].id;
+								  break;
+							  }
+						  }
+						  map.addLayer({
+							  'id': '3d-buildings',
+							  'source': 'composite',
+							  'source-layer': 'building',
+							  'filter': ['==', 'extrude', 'true'],
+							  'type': 'fill-extrusion',
+							  'minzoom': 15,
+							  'paint': {
+								  'fill-extrusion-color': '#aaa',
+								  // use an 'interpolate' expression to add a smooth transition effect to the
+								  // buildings as the user zooms in
+								  'fill-extrusion-height': [
+									  "interpolate", ["linear"], ["zoom"],
+									  15, 0,
+									  15.05, ["get", "height"]
+								  ],
+								  'fill-extrusion-base': [
+									  "interpolate", ["linear"], ["zoom"],
+									  15, 0,
+									  15.05, ["get", "min_height"]
+								  ],
+								  'fill-extrusion-opacity': .6
+							  }
+						  }, labelLayerId);
+					  });
+				  }
+				  display_map(longitude, latitude);
+			  </script>
+    
+            <button type="submit" class="btn-custom">Submit</button>
+          </form>
+        </div> 
+      </div> 
+    
+      {% if message|length > 1 %}
+      <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alert</h5>
+            </div>
+            <div class="modal-body">
+                <p>{{message}}</p>
+            </div>
+        </div>
+    </div>
+      {% endif %}
+    
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+  <script>
+    $(window).load(function(){        
+     $('#myModal').modal('show');
+       }); 
+ </script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+<script type="text/javascript">
+	function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+	}
+	</script>
+	
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

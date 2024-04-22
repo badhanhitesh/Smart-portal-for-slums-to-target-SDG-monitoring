@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- My CSS -->
+	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/tabbedPanes.css') }}" rel="stylesheet">
+
+	<title>Admin Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+			<img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+			<h2>Pukar</h2>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a href="/dashboard/Admin">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/admin/addSlum">
+					<i class='bx bxs-message-add' ></i>
+					<span class="text">Activities</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/admin/activity/status">
+					<i class='bx bxs-hand-up' ></i>
+					<span class="text">Requests</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/dashboard/admin/jobs/requests">
+					<i class='bx bx-briefcase' ></i>
+					<span class="text">Job Requests</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link"></a>
+			<form action="#">
+				
+			</form>
+			<div id="google_translate_element"></div>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename=session.profilePic) }}">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>{{message}}</h1>
+					
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/dashboard/Admin">Home</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/dashboard/admin/jobs/requests">Jobs</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+					</ul>
+				</div>
+			
+			</div>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Details of Jobs under you</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<div class="page-content page-container" id="page-content">
+							<div class="padding">
+								<div class="row container d-flex ">
+									<div class="col-sm-6">
+										<div class="mb-3">
+													  <ul class="nav nav-pills" id="myTab" role="tablist">
+														 <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home" aria-selected="true">Pending</a></li>
+														 <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile" aria-selected="false">Approved</a></li>
+													  </ul>
+												   </div>
+												   <div class="tab-content mb-4">
+													  <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab">
+														
+											
+														<div class="col-12">
+															{% for job in jobReqs%}
+															<div class="card card-block" style="background-color: #eee;margin: 1vw;padding: 1vw;border-radius: 0.5vw;display: flex;align-self: center;width: 100%;gap:10%">
+																<div class="request" style="min-width: 40%;">
+																	<h5>Username : {{job.name}}</h5>
+																	<h5>Slum Name : {{job.slumName}}</h5>
+																	<h5>Contact : {{job.contact}}</h5>
+																	<h5>Email : {{job.email}}</h5>
+																	<h5>Occupation : {{job.occupation}}</h5>
+																	<br/>
+																	<a href="/dashboard/admin/job/remove/{{job._id}}" style="padding: 0.5vw;background-color: #275497;color: white;border-radius: 1vw;" onclick="alert('Thanks for catering client')">Fullfill Request</a>
+																</div>
+																</div>
+																{% endfor %}
+															</div>
+													
+												
+														 
+													  </div>
+													  <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
+												
+														<div class="col-12">
+															{% for job in jobAppr%}
+															<div class="card card-block" style="background-color: #eee;margin: 1vw;padding: 1vw;border-radius: 0.5vw;display: flex;align-self: center;width: 100%;gap:10%">
+																<div class="request" style="min-width: 40%;">
+																	<h5>Username : {{job.name}}</h5>
+																	<h5>Slum Name : {{job.slumName}}</h5>
+																	<h5>Contact : {{job.contact}}</h5>
+																	<h5>Email : {{job.email}}</h5>
+																	<h5>Occupation : {{job.occupation}}</h5>
+																	<br/>
+																</div>
+															</div>
+															{% endfor %}
+														 </div>
+												  </div>
+													
+												   </div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		}
+		</script>
+		
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	<script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

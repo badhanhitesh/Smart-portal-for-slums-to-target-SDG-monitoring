@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/activities.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/activityInfo.css') }}" rel="stylesheet">
+
+	<title>User Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+			<img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+			<h2>Pukar</h2>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/dashboard/User">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activities">
+					<i class='bx bxs-message-add' ></i>
+					<span class="text">Activities</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/jobs">
+					<i class='bx bx-briefcase' ></i>
+					<span class="text">Jobs</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/dashboard/user/activity/status">
+					<i class='bx bxs-hand-up' ></i>
+					<span class="text">Requests</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activity/registered">
+					<i class='bx bxs-registered' ></i>
+					<span class="text">My Registered Activities</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link"></a>
+			<form action="#">
+				
+			</form>
+			<div id="google_translate_element"></div>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename=session.profilePic) }}">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>{{message}}</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/dashboard/User">Home</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+							<a class="active" href="/dashboard/user/activities">Activities</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+							<a class="active" href="/dashboard/user/activity/info/{{activityName}}">{{activityName}}</a>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+
+		
+
+			<div class="table-data">
+				<div class="order" style="overflow:auto;">
+                    <div class="container">
+                        <div class="content">
+							<form class="form" method="post">
+								<h2>Form to host {{activityName}}</h2>
+								<p>Provide the following details</p>
+								<br/>
+								<input id="one" type="radio" name="stage" checked="checked" />
+								<input id="two" type="radio" name="stage" />
+								<input id="three" type="radio" name="stage" />
+								<input id="four" type="radio" name="stage" />
+								<input id="five" type="radio" name="stage" />
+								<input id="six" type="radio" name="stage" />
+							
+								<div class="stages">
+									<label for="one">1</label>
+									<label for="two">2</label>
+									<label for="three">3</label>
+									<label for="four">4</label>
+									<label for="five">5</label>
+									<label for="six">6</label>
+								</div>
+							
+								<span class="progress"><span></span></span>
+							
+								<div class="panels">
+									<div data-panel="one">
+										<h4>Slum Name</h4>
+										<span class="input-group-addon">Please select the Slum &nbsp;</span>
+										<select name="slumName" id="slumName" class="selectpicker form-control" required>
+										  {% for slum in slums %}
+										  	<option value="{{ slum.slumName }}">{{ slum.slumName }}</option>
+										  {% endfor %}
+										</select>
+							
+									</div>
+									<div data-panel="two">
+										<h4>Provide Personal Info</h4>
+										<h3 id="SlumNamePage2"></h3>
+										<label for="userName">Your Name</label>
+										<input type="text" name="userName" value="{{session.name}}" minlength="3" />
+
+										<br/>
+										
+										<label for="userEmail">Your Email</label>
+										<input type="text" name="userEmail" value="{{session.email}}"/>
+
+										<br/>
+										
+										<label for="userContactNumber">Your Contact Number</label>
+										<input type="text" name="userContactNumber" placeholder="please Enter your contact number here" maxlength="10" minlength="10"  />
+
+										<br/>
+										
+										<label for="designation">Your Designation</label>
+										<br/>
+										<select name="designation" id="designation" class="selectpicker form-control" required>
+											
+											<option value="Student" selected="selected">Student Council</option>
+											<option value="NGO">NGO</option>
+											<option value="Individual">Individual</option>
+										</select>
+										<br/>
+										<br/>
+										<label for="address">Address</label>
+										<br/>
+										<textarea name="address" minlength="10"></textarea>
+									</div>
+									<div data-panel="three">
+										<h4>Select Date and Time for your activity</h4>
+										<label for="date">Date:</label>
+										<input type="date" id="date" name="date" required><br>
+										<label for="time">Time:</label>
+										<input type="time" id="time" name="time" required><br>
+									</div>
+									<div data-panel="four">
+										<label for="organisation">Name of Organisation</label>
+										<input type="text" name="organisation" placeholder="Enter Name of Organisation" minlength="5" />
+										<h4>Description about your drive in short</h4>
+										<textarea name="description" placeholder="Enter Description here" minlength="10"></textarea>
+									</div>
+									<div data-panel="five">
+										<h4>Needed Reasources</h4>
+										<textarea name="reasources" placeholder="Enter Reasources here" minlength="10"></textarea>
+									</div>
+									<div data-panel="six">
+										<h4>Stage 6</h4>
+										<h5>We got all the required Information please click on submit to get required report</h5>
+										<button onclick="validateForm()">Submit</button>
+									</div>
+								</div>
+							
+								
+							
+							</form>
+                       
+						
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		}
+		</script>
+		
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script>
+		var selectField = document.getElementById('slumName');
+		var hiddenField = document.getElementById('SlumNamePage2');
+
+		selectField.addEventListener('change', function() {
+			hiddenField.innerHTML = "Selected Slum : "+selectField.value;
+		});
+
+		$('.form .stages label').click(function() {
+				var radioButtons = $('.form input:radio');
+				var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+				selectedIndex = selectedIndex + 1;	
+			
+});
+
+ $('.form button').click(function() {
+	var radioButtons = $('.form input:radio');
+	var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+
+	selectedIndex = selectedIndex + 2;
+
+	$('.form input[type="radio"]:nth-of-type(' + selectedIndex + ')').prop('checked', true);
+
+	if (selectedIndex == 6) {
+		$('button').html('Submit');
+
+	}
+});
+
+function validateForm() {
+	var msg='{{message}}';
+	if(msg.length==0)
+	{
+		alert('There are errors in your form please fill all fields carefully');
+	}
+}
+
+	  </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+
+	<title>User Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+			<img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+			<h2>Pukar</h2>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="/dashboard/User">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activities">
+					<i class='bx bxs-message-add' ></i>
+					<span class="text">Activities</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/jobs">
+					<i class='bx bx-briefcase' ></i>
+					<span class="text">Jobs</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activity/status">
+					<i class='bx bxs-hand-up' ></i>
+					<span class="text">Requests</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activity/registered">
+					<i class='bx bxs-registered' ></i>
+					<span class="text">My Registered Activities</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link"></a>
+			<form action="#">
+				
+			</form>
+			<div id="google_translate_element"></div>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename=session.profilePic) }}">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>{{greeting}}</h1>
+					
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/dashboard/Admin">Home</a>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-cabinet' ></i>
+					<span class="text">
+						<p>Number of Activites Available</p>
+						<h3>{{no_ofActivities}}</h3>
+					</span>
+				</li>
+			</ul>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Activities ongoing</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<div class="container-fluid">
+							<div class="row flex-row flex-nowrap">
+								{% for activity in onGoingActivites%}
+								<div class="col-12">
+									<a href="/dashboard/user/activity/register/{{activity._id}}" style="color:black">
+									<div class="card card-block" style="background-color: #eee;margin: 1vw;padding: 1vw;border-radius: 0.5vw;display: flex;align-self: center;width: 100%;gap:10%">
+										<div class="weather" style="min-width: 40%;">
+											<h3>Slum Name : {{activity.slumName}}</h3>
+											<h3>Organisation : {{activity.organization}}</h3>
+											<h3>Event : {{activity.event}}</h3>
+											<h3>Date : {{activity.date.strftime('%Y-%m-%d')}}</h3>
+											<h3>Time : {{activity.time.strftime('%H:%M:%S')}}</h3>
+											{%for acti in activity.participants%}
+												{%if acti.name ==session.name%}
+													<br/>
+													<a href="/dashboard/user/activity/unregister/{{activity._id}}" style="padding: 0.5vw;background-color: #275497;color: white;border-radius: 1vw;" onclick="alert('unregistered from {{activity.event}}')">Unregister</a>
+												{%endif%}
+												{%if acti.name !=session.name%}
+													<br/>
+													<a href="/dashboard/user/activity/register/{{activity._id}}" style="padding: 0.5vw;background-color: #275497;color: white;border-radius: 1vw;">Register</a>
+												{%endif%}
+											{%endfor%}
+										</div>
+									</div>
+								</a>
+								</div>
+							{% endfor %}
+							</div>
+						</div>
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		}
+		</script>
+		
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

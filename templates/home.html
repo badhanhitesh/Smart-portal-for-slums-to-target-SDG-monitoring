@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>LBS</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta
+        content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link
+        href="img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/flaticon/font/flaticon.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+        <link
+        href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet">
+        <title>Pukar</title>
+    </head>
+    <style>
+        .goog-te-gadget img {
+            display: none !important;
+        }
+        body > .skiptranslate {
+            display: none;
+        }
+        body {
+            top: 0 !important;
+        }
+    </style>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Pukar</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="/" class="nav-item nav-link active">Home</a>
+                        <a href="/login" class="nav-item nav-link active">Login</a>
+                        <a href="/about" class="nav-item nav-link active">About</a>
+                        <div id="google_translate_element"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+
+        <!-- Carousel Start -->
+        <div class="carousel">
+            <div class="container-fluid">
+                <div class="owl-carousel">
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="https://borgenproject.org/wp-content/uploads/24832523780_54b00f7fb0_z.jpg" alt="Image">
+
+                        </div>
+                        <div class="carousel-text">
+                            <h1>Transforming Lives in the Slums</h1>
+                            <p>
+                                The development of slums is a human tragedy and an obstacle to sustainable urban development. It is a challenge that must be addressed with a sense of urgency.
+                            </p>
+                            <div class="carousel-btn" style="display: flex;">
+                                    <form action="/create-checkout-session" method="post">
+                                        <button class="btn btn-custom btn-play"  type="submit" id="checkout-button">Donate Now</button>
+                                    </form>
+                                <a class="btn btn-custom btn-play" data-toggle="modal" data-src="https://www.youtube.com/embed/R1eJ7nDvP54" data-target="#videoModal">Watch Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+        <!-- Video Modal Start-->
+        <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Video Modal End -->
+
+
+        <!-- About Start -->
+        <div class="about">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-img" data-parallax="scroll" data-image-src="{{ url_for('static', filename='img/about1.jpg') }}"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="section-header">
+                            <h2>Make cities and human settlements inclusive, safe, resilient and sustainable</h2>
+                        </div>
+                        <div class="about-tab">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" href="#tab-content-1">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#tab-content-2">Mission</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#tab-content-3">Vision</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="tab-content-1" class="container tab-pane active">
+                                    The phrase "Make cities and human settlements inclusive, safe, resilient and sustainable" is part of the United Nations Sustainable Development Goal (SDG) 11, which was adopted by 193 member countries in 2015 as part of the 2030 Agenda for Sustainable Development. The goal aims to ensure that all people have access to safe and affordable housing, adequate basic services, and opportunities for social, economic and cultural development.
+                                </div>
+                                <div id="tab-content-2" class="container tab-pane fade">
+                                    The mission of slum development is to improve the living conditions and quality of life for people living in slums, which are often characterized by inadequate housing, overcrowding, lack of basic services and infrastructure, and poverty. This mission can be accomplished through a combination of interventions.
+                                </div>
+                                <div id="tab-content-3" class="container tab-pane fade">
+                                    The SDG 11 aims to create cities and human settlements that are inclusive, safe, resilient, and sustainable, so that all people can live in dignity and prosperity, and the planet can continue to support human life for generations to come.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+
+        <!-- Service Start -->
+        <div class="service">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>We believe that we can save more lifes with you</h2>
+                </div>
+               
+            </div>
+        </div>
+        <!-- Service End -->
+
+
+
+        <!-- Donate Start -->
+        <div class="donate" data-parallax="scroll" data-image-src="{{ url_for('static', filename='img/donate.jpg') }}">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="donate-content">
+                            <div class="section-header">
+                                <p>Donate Now</p>
+                                <h2>Let's donate to needy people for better lives</h2>
+                            </div>
+                            <div class="donate-text">
+                                <p>
+                                    Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non. Aliquam metus tortor, auctor id gravida, viverra quis sem. Curabitur non nisl nec nisi maximus. Aenean convallis porttitor. Aliquam interdum at lacus non blandit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="donate-form">
+                            <form>
+                                <div class="control-group">
+                                    <input type="text" class="form-control" placeholder="Name" required="required"/>
+                                </div>
+                                <div class="control-group">
+                                    <input type="email" class="form-control" placeholder="Email" required="required"/>
+                                </div>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-custom active">
+                                        <input type="radio" name="options" checked>
+                                        $10
+                                    </label>
+                                    <label class="btn btn-custom">
+                                        <input type="radio" name="options">
+                                        $20
+                                    </label>
+                                    <label class="btn btn-custom">
+                                        <input type="radio" name="options">
+                                        $30
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-custom" type="submit">Donate Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Donate End -->
+
+
+
+
+
+        <!-- Volunteer Start -->
+        <div class="volunteer" data-parallax="scroll" data-image-src="https://gt20.org/wp-content/uploads/2016/09/volunteer-768x328.png">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                                <div>
+                                    <a href="/register" style="color: black;background-color: rgb(255, 255, 255);font-weight: bolder;font-size: large;padding: 2vw;border-radius: 2vw;">Become a volunteer</a>
+                                </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="volunteer-content">
+                            <div class="section-header">
+                                <p>Become A Volunteer</p>
+                                <h2>Let’s make a difference in the lives of others</h2>
+                            </div>
+                            <div class="volunteer-text">
+                                <p>
+                                    Let's take a step towards a noble cause.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Volunteer End -->
+
+
+        <!-- Contact Start -->
+        <div class="contact">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Get In Touch</p>
+                    <h2>Contact for any query</h2>
+                </div>
+                <div class="contact-img">
+                    <img src="https://cfstatic.give.do/3811fd9e-7d40-43e8-bf54-d3b6bfcd5e88.JPG" alt="Image">
+                </div>
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate" action="mailto:sdgforslums@outlook.com" method="post" enctype="text/plain">
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-custom" type="submit" id="sendMessageButton" style="color: white;background-color: black;">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+        <!-- Footer Start -->
+        <div class="footer" style="background-color:#20212B;">
+            <p style="margin: 5vh;padding: 5vh;font-size: 20px;text-align: center;">
+                <a href="/" style="color: white;">SDG SOLUTIONS FOR SLUMS</a>
+            </p>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to top button -->
+        <a href="#" class="back-to-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/parallax/parallax.min.js') }}"></script>
+
+
+        <!-- Template Javascript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                }, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </body>
+</html>

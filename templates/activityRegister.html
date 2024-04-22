@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta
+        name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Boxicons -->
+        <link
+        href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <!-- My CSS -->
+        <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+
+        <title>User Dashboard</title>
+    </head>
+    <body>
+
+
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+                <img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+                <h2>Pukar</h2>
+            </a>
+            <ul class="side-menu top">
+                <li class="active">
+                    <a href="/dashboard/User">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/user/activities">
+                        <i class='bx bxs-message-add'></i>
+                        <span class="text">Activities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/user/jobs">
+                        <i class='bx bx-briefcase'></i>
+                        <span class="text">Jobs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/user/activity/status">
+                        <i class='bx bxs-hand-up'></i>
+                        <span class="text">Requests</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/user/activity/registered">
+                        <i class='bx bxs-registered'></i>
+                        <span class="text">My Registered Activities</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="side-menu">
+                <li>
+                    <a href="/logout" class="logout">
+                        <i class='bx bxs-log-out-circle'></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+
+
+        <!-- CONTENT -->
+        <section
+            id="content">
+            <!-- NAVBAR -->
+            <nav>
+                <i class='bx bx-menu'></i>
+                <a href="#" class="nav-link"></a>
+                <form action="#"></form>
+                <div id="google_translate_element"></div>
+                <a href="#" class="profile">
+                    <img src="{{ url_for('static', filename=session.profilePic) }}">
+                </a>
+            </nav>
+            <!-- NAVBAR -->
+
+            <!-- MAIN -->
+            <main>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>{{message}}</h1>
+
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="/dashboard/User">Dashboard</a>
+                            </li>
+                            <li>
+                                <i class='bx bx-chevron-right'></i>
+                            </li>
+                            <li>
+                                <a class="active" href="/dashboard/User">Home</a>
+                            </li>
+                            <li>
+                                <i class='bx bx-chevron-right'></i>
+                            </li>
+                            <li>
+                                <a class="active" href="/dashboard/user/activity/register/{{activity._id}}">Registeration</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <ul class="box-info">
+                    <li>
+                        <i class='bx bxs-user'></i>
+                        <span class="text">
+                            <p>Number of participants
+                            </p>
+                            <h3>{{no_of_participents}}</h3>
+                        </span>
+                    </li>
+                </ul>
+
+
+                <div class="table-data">
+                    <div class="order">
+                        <div class="head">
+                            <h3>Activity Information</h3>
+                            <i class='bx bx-search'></i>
+                            <i class='bx bx-filter'></i>
+                        </div>
+                        <table>
+                            <div class="container-fluid">
+                                <div class="row flex-row flex-nowrap">
+                                    <div class="col-12">
+                                        <div class="card card-block" style="background-color: #eee;margin: 1vw;padding: 1vw;border-radius: 0.5vw;display: flex;align-self: center;width: 100%;gap:10%">
+                                            <div class="weather" style="min-width: 40%;">
+                                                <h1>Slum Name :
+                                                    {{activity.slumName}}</h1>
+                                                <h1>Address :
+                                                    {{slum.address}}</h1>
+                                                <h1>City :
+                                                    {{slum.city}}</h1>
+                                                <h1>Organisation :
+                                                    {{activity.organization}}</h1>
+                                                <h1>Event :
+                                                    {{activity.event}}</h1>
+                                                <h1>Date :
+                                                    {{activity.date.strftime('%Y-%m-%d')}}</h1>
+
+                                                <div class="container" style="width: 70vw;">
+                                                    <br/>
+                                                    <br/>
+                                                    <h1>Geographical Location</h1>
+													<div id='map-overlay'>Distance: </div>
+                                                    <div id='map' style='width: 90%; height:500px;'></div><br/><br/>
+													
+
+                                                </div>
+
+                                                <form method="post">
+                                                    <button type="submit" style="padding: 1vw;background-color: #275497;color: white;border-radius: 1vw;" onclick="alert('Registered')">Register for this event</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </main>
+            <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+            <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet'/>
+            <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+			<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+            <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css'/>
+            <script>
+               
+
+                var longitude ="{{ slum['longitude'] }}",
+                    latitude ="{{ slum['latitude'] }}";
+           
+                function display_map(longitude, latitude) {
+                    mapboxgl.accessToken = "{{ mapbox_access_token }}"
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/satellite-streets-v10',
+                        center: [
+                            longitude, latitude
+                        ],
+                        zoom: 16,
+                        bearing: -17.6,
+                        pitch: 45
+
+                    });
+
+					window.onload = function () {
+                    getLocation();
+                };
+
+					function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    }
+                }
+
+
+                  
+					function showPosition(position) {
+						var to = [longitude, latitude] // lng, lat
+                    var from = [position.coords.longitude, position.coords.latitude] // lng, lat
+
+
+                    var greenMarker = new mapboxgl.Marker({color: 'green'}).setLngLat(to).addTo(map) // marker position using variable 'to'.addTo(map); // add marker to map
+
+                    var purpleMarker = new mapboxgl.Marker({color: 'purple'}).setLngLat(from).addTo(map) // marker position using variable 'from'.addTo(map); // add marker to map
+
+                    var options = {
+                        units: 'kilometers',
+                    }; // units can be degrees, radians, miles, or kilometers, just be sure to change the units in the text box to match.
+
+                    var distance = turf.distance(to, from, options);
+
+                    var value = document.getElementById('map-overlay')
+                    value.innerHTML = "Distance: " + distance.toFixed([2]) + " Km"
+                }
+                  
+
+                    // fulscreen button
+                    map.addControl(new mapboxgl.FullscreenControl());
+                    // display a blue marker
+                    var marker = new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map);
+
+
+                    // Navigation marker at top-left corner
+                    var nav = new mapboxgl.NavigationControl();
+                    map.addControl(nav, 'top-left');
+
+
+                    const geocoder = new MapboxGeocoder({ // Initialize the geocoder
+                        accessToken: mapboxgl.accessToken, // Set the access token
+                        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+                        marker: false // Do not use the default marker style
+                    });
+
+                    // Add the geocoder to the map
+                    map.addControl(geocoder);
+
+                    // change false to true, to get your location. Then, enable location in the browser.
+                    map.addControl(new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: false
+                        },
+                        trackUserLocation: false
+                    }));
+                    // The 'building' layer in the mapbox-streets vector source contains building-height
+                    // data from OpenStreetMap.
+                    map.on('load', function () { // Insert the layer beneath any symbol layer.
+                        var layers = map.getStyle().layers;
+                        var labelLayerId;
+                        for (var i = 0; i < layers.length; i++) {
+                            if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                                labelLayerId = layers[i].id;
+                                break;
+                            }
+                        }
+                        map.addLayer({
+                            'id': '3d-buildings',
+                            'source': 'composite',
+                            'source-layer': 'building',
+                            'filter': [
+                                '==', 'extrude', 'true'
+                            ],
+                            'type': 'fill-extrusion',
+                            'minzoom': 15,
+                            'paint': {
+                                'fill-extrusion-color': '#aaa',
+                                // use an 'interpolate' expression to add a smooth transition effect to the
+                                // buildings as the user zooms in
+                                'fill-extrusion-height': [
+                                    "interpolate",
+                                    ["linear"],
+                                    ["zoom"],
+                                    15,
+                                    0,
+                                    15.05,
+                                    [
+                                        "get", "height"
+                                    ]
+                                ],
+                                'fill-extrusion-base': [
+                                    "interpolate",
+                                    ["linear"],
+                                    ["zoom"],
+                                    15,
+                                    0,
+                                    15.05,
+                                    [
+                                        "get", "min_height"
+                                    ]
+                                ],
+                                'fill-extrusion-opacity': .6
+                            }
+                        }, labelLayerId);
+                    });
+                }
+                display_map(longitude, latitude);
+            </script>
+            <!-- MAIN -->
+        </section>
+        <!-- CONTENT -->
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                }, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+        <script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/activities.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/activityInfo.css') }}" rel="stylesheet">
+
+	<title>User Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand" style="margin: 1vw;margin-top: 2vh;gap: 40px">
+			<img src="https://www.un.org/sites/un2.un.org/files/2019/12/sdg_wheel_print_transparent.png" alt="profile" style="border-radius: 20vw;box-shadow: 2px 2px 20px black;width: 30px;height: 30px;">
+			<h2>Pukar</h2>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/dashboard/User">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activities">
+					<i class='bx bxs-message-add' ></i>
+					<span class="text">Activities</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/dashboard/user/jobs">
+					<i class='bx bx-briefcase' ></i>
+					<span class="text">Jobs</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activity/status">
+					<i class='bx bxs-hand-up' ></i>
+					<span class="text">Requests</span>
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/user/activity/registered">
+					<i class='bx bxs-registered' ></i>
+					<span class="text">My Registered Activities</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link"></a>
+			<form action="#">
+				
+			</form>
+			<div id="google_translate_element" style="all:initial"></div>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename=session.profilePic) }}">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>{{message}}</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/dashboard/User">Home</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+							<a class="active" href="/dashboard/user/activities">Jobs</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+							<a class="active" href="/dashboard/user/job/info/{{jobName}}">{{jobName}}</a>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+
+		
+
+			<div class="table-data">
+				<div class="order" style="overflow:auto;">
+                    <div class="container">
+                        <div class="content">
+                            <h1>Job Enrollment Form for {{jobName}}</h1>
+                            <h3 id="message">{{message}}</h3>
+                            <form method="POST">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" required><br>
+                        
+                                <label for="age">Dob:</label>
+                                <input type="date" id="dob" name="dob" onchange="calculateAge()"><br>
+                                <h4 id="age"></h4>
+
+                                <label for="aadhaar">Aadhaar Number:</label><br>
+                                <input type="text" id="aadhaar" name="aadhaar" pattern="[0-9]{12}" maxlength="12" required><br>
+                        
+                                <label for="gender">Gender:</label><br>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select your gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="nonbinary">Non-binary</option>
+                                    <option value="other">Other</option>
+                                </select><br><br>
+                                
+                                <span class="input-group-addon">Please select your the Slum &nbsp;</span><br/>
+										<select name="slumName" id="slumName" class="selectpicker form-control" required>
+										  {% for slum in slums %}
+										  	<option value="{{ slum.slumName }}">{{ slum.slumName }}</option>
+										  {% endfor %}
+										</select><br/>
+                                        <br/>
+
+                                <label for="occupation">Occupation:</label>
+                                <input type="text" id="occupation" name="occupation" value="{{jobName}}" readonly><br>
+                        
+                                <label for="education">Education:</label>
+                                <input type="text" id="education" name="education" required><br>
+                        
+                                <label for="contact">Contact number:</label>
+                                <input type="text" id="contact" name="contact" required minlength="10" maxlength="10"><br>
+                        
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required><br>
+                        
+                                <label for="address">Address:</label><br>
+                                <textarea id="address" name="address" required></textarea><br>
+                        
+                              <button type="submit" id="sub" onclick="alert('Thank you for submitting your information We will be in touch with you shortly')">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>		
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+</body>
+<script src="{{ url_for('static', filename='js/dashboardScript.js') }}"></script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+    function calculateAge() {
+			var dob = new Date(document.getElementById('dob').value);
+			var today = new Date();
+			var age = today.getFullYear() - dob.getFullYear();
+			if (today.getMonth() < dob.getMonth() || (today.getMonth() == dob.getMonth() && today.getDate() < dob.getDate())) {
+				age--;
+			}
+			document.getElementById('age').innerHTML = 'Your age is ' + age + ' years.';
+            if(age <18)
+            {
+                document.getElementById('message').innerHTML="You are under 18"
+                document.getElementById('sub').disabled = true;
+            }
+            else
+            {
+                document.getElementById('message').innerHTML=""
+                document.getElementById('sub').disabled = false;
+            }
+		}
+</script>
+</html>

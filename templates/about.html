@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>LBS</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta
+        content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link
+        href="img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/flaticon/font/flaticon.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+        <link
+        href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet">
+        <title>SDG for Slums</title>
+    </head>
+    <style>
+        .goog-te-gadget img {
+            display: none !important;
+        }
+        body > .skiptranslate {
+            display: none;
+        }
+        body {
+            top: 0 !important;
+        }
+    </style>
+
+    <body style="background-color:#333333">
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Pukar</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="/" class="nav-item nav-link active">Home</a>
+                        <a href="/login" class="nav-item nav-link active">Login</a>
+                        <a href="/about" class="nav-item nav-link active">About</a>
+                        <div id="google_translate_element"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+        <br/>
+        <br/>
+        <br/>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/No_Poverty.png') }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">No Poverty</h5>
+                  <p class="card-text">SDG 1 is critical to achieving sustainable development because poverty affects every aspect of human life and impedes progress in all other areas, including health, education, gender equality, and environmental sustainability.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/Good_Health.png') }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Good Health</h5>
+                  <p class="card-text">SDG 3 is critical to achieving sustainable development because good health and well-being are essential for human flourishing and for achieving other development goals, including education, gender equality, and economic growth.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/Good_Job.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Decent Work and Economic Growth</h5>
+                  <p class="card-text">SDG 8 is critical to achieving sustainable development because economic growth and decent work are essential for reducing poverty and inequality, promoting gender equality, good health and well-being and quality education.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/Partnership.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Partnerships for the Goals</h5>
+                  <p class="card-text">SDG 17 is critical to achieving sustainable development because no single actor or country can achieve the SDGs alone. Collaboration and partnership are essential for implementing effective solutions. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <!-- Back to top button -->
+        <a href="#" class="back-to-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/parallax/parallax.min.js') }}"></script>
+
+
+        <!-- Template Javascript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                }, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </body>
+</html>
