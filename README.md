@@ -39,25 +39,27 @@
 
    
 2. Navigate to the project directory:
-
+  ```bash
   cd CityMonitor
 
 3. Install backend dependencies:
-
+  ```bash
   pip install -r requirements.txt
 
 4. Install frontend dependencies:
-  
+  ```bash
   cd client
   npm install
 
 ## 🚀 Usage
 
 ### Run the backend server:
+```bash
 cd ..
 python app.py
 
 ### Run the frontend server:
+```bash
 cd client
 npm start
 
